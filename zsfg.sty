@@ -56,6 +56,7 @@ boxrule=0pt,bottomrule=1pt,toprule=1pt}
 \usepackage{amssymb}
 
 \usepackage{palatino}
+
 % does not work with the build system i have in ST
 % but works when compiling in WSL with pdflatex
 % \usepackage{gillius} 
@@ -73,7 +74,7 @@ boxrule=0pt,bottomrule=1pt,toprule=1pt}
 	\begin{figure}[H]
 		\center
 		\includegraphics[width=\columnwidth]{#1}
-		\caption{#2}
+		\caption{\footnotesize #2}
 	\end{figure}
 }
 
@@ -115,7 +116,6 @@ boxrule=0pt,bottomrule=1pt,toprule=1pt}
 \newcommand{\note}[1]{\textit{\textcolor{teal}{#1}}}
 
 \newcommand{\gray}[1]{\textit{\textcolor{gray}{#1}}}
-
 \newcommand{\todo}[1]{\textit{\textcolor{red}{#1}}}
 
 \newcommand{\inlinedef}[1]{\textit{\textcolor{purple}{#1}}}
@@ -125,8 +125,6 @@ boxrule=0pt,bottomrule=1pt,toprule=1pt}
 \textit{#1} \\
 #2 \\
 }
-
-
 % formatting for facts to remember
 \newenvironment{fact}[1][(i)]{
 \paragraph{\textcolor{blue}{#1}} 
@@ -227,6 +225,18 @@ boxrule=0pt,bottomrule=1pt,toprule=1pt}
 \usepackage{geometry} % Required to change the page size to A4
 \geometry{a4paper} % Set the page size to be A4 as opposed to the default US Letter
 
+% https://tex.stackexchange.com/questions/31336/how-can-i-display-an-array-as-in-the-data-structure-from-computer-science-not
+\usepackage{tikz}
+\usetikzlibrary{calc}
+\newcommand{\tikzarray}[1]{
+  \begin{tikzpicture}[baseline=(n.base)]
+    \coordinate (s) at (0,0);
+    \foreach \num in {#1}{
+      \node (n) [minimum size=6mm, draw, rectangle] at (s) {\num};
+      \coordinate (s) at ($(s) + (8mm,0)$);
+    }
+  \end{tikzpicture}
+}
 
 % \newcommand{\definition}[2] {
 % 	\paragraph{
