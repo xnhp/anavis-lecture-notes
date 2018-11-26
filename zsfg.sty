@@ -1,0 +1,242 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{zsfg}[2018/02/05 Zsfg]
+
+% \usepackage{enumitem}
+
+% or "RequirePackage"
+\usepackage{tabularx}
+
+% transparent text
+\usepackage{transparent}
+
+\usepackage{tcolorbox}
+\newtcbox{\colortag}[1][red]{on line,
+arc=3pt,colback=#1!10!white,colframe=#1!50!black,
+before upper={\rule[-3pt]{0pt}{10pt}},boxrule=1pt,
+boxsep=0pt,left=3pt,right=4pt,top=3pt,bottom=1pt}
+\newtcbox{\coloremph}[1][red]{on line,
+arc=0pt,outer arc=0pt,colback=#1!10!white,colframe=#1!50!black,
+boxsep=0pt,left=1pt,right=1pt,top=2pt,bottom=2pt,
+boxrule=0pt,bottomrule=1pt,toprule=1pt}
+% usage:
+% The \colourtag[green]{quick} brown 
+\newcommand{\tagcontentformat}{\footnotesize \transparent{0.7} \sffamily}
+\newcommand{\greentag}[1]{\colortag[green]{\tagcontentformat #1}}
+\newcommand{\orangetag}[1]{\colortag[orange]{\tagcontentformat #1}}
+\newcommand{\redtag}[1]{\colortag[red]{\tagcontentformat #1}}
+
+\newcommand{\lastcompiled}{\textit{Stand: \today~\currenttime } \\}
+
+\newcommand{\cd}[1]{\lstinline$#1$}
+\newcommand{\bcd}[1]{\textbf{\lstinline$#1$}}
+\newcommand{\nullbyte}{\cd{\\0} }
+
+% do not display heading line in \tableofcontents
+% https://tex.stackexchange.com/questions/55080/how-to-hide-the-table-of-contents-heading
+\makeatletter
+\renewcommand\tableofcontents{%
+    \@starttoc{toc}%
+}
+\makeatother
+
+% e.g. for \currenttime
+\usepackage{datetime}
+
+\usepackage{listings}
+
+\usepackage{amsmath}
+
+\usepackage{graphicx} % Required for including pictures
+
+\usepackage{float} % Allows putting an [H] in \begin{figure} to specify the exact location of the figure
+\usepackage{wrapfig} % Allows in-line images such as the example fish picture
+
+\usepackage{lipsum} % Used for inserting dummy 'Lorem ipsum' text into the template
+
+\usepackage{amssymb}
+
+\usepackage{palatino}
+% does not work with the build system i have in ST
+% but works when compiling in WSL with pdflatex
+% \usepackage{gillius} 
+
+% \usepackage{avant} % works in windows/ST
+\usepackage{helvet}
+
+\lstset{basicstyle=\ttfamily}
+
+\newcommand\textboxfull[1]{%
+  \parbox{\textwidth}{#1}%
+}
+
+\newcommand{\textwidthimage}[2]{%
+	\begin{figure}[H]
+		\center
+		\includegraphics[width=\columnwidth]{#1}
+		\caption{#2}
+	\end{figure}
+}
+
+\newcommand{\smalltwimg}[2]{%
+  \begin{figure}[H]
+    \center
+    \includegraphics[width=0.8\columnwidth]{#1}
+    \caption{#2}
+  \end{figure}
+}
+
+\newcommand{\source}[1]{{\tiny \hfill \it #1}}
+
+\usepackage{pifont}% http://ctan.org/pkg/pifont 
+% \cmark
+% \xmark
+\newcommand{\cmark}{\ding{51}}%
+\newcommand{\xmark}{\ding{55}}%
+\usepackage{xcolor}
+
+\usepackage[utf8]{inputenc}
+
+
+\usepackage[shortlabels]{enumitem}
+
+% % https://tex.stackexchange.com/questions/373500/itemize-inside-newenvironment
+% \newlist{myenumerate}{enumerate}{1}
+% \setlist[myenumerate,1]{label = \ding{52}}
+% % also customize item
+
+% or if we want the text also green, we just make an "advantagelist"
+\newcommand{\advantageit}{\item[\textcolor{teal}{ $\oplus$ }]}
+\newcommand{\disadvantageit}{\item[\textcolor{red}{ $\ominus$ }]}
+
+\newcommand{\excl}{\textbf{\textcolor{red}{!~}}}
+
+\newcommand{\attention}[1][Achtung: ]{\textbf{#1}}
+
+\newcommand{\note}[1]{\textit{\textcolor{teal}{#1}}}
+
+\newcommand{\gray}[1]{\textit{\textcolor{gray}{#1}}}
+
+\newcommand{\todo}[1]{\textit{\textcolor{red}{#1}}}
+
+\newcommand{\inlinedef}[1]{\textit{\textcolor{purple}{#1}}}
+
+
+\newenvironment{question}[2]{%
+\textit{#1} \\
+#2 \\
+}
+
+
+% formatting for facts to remember
+\newenvironment{fact}[1][(i)]{
+\paragraph{\textcolor{blue}{#1}} 
+}
+
+\usepackage{scrextend}
+% Formatting for definitions
+% usage:
+% \begin{definition}[Profound Term]
+% 	Lorem ipsum dolor sit amet. Begins the essay on a new page instead of on the same page as the table of contents 
+% \end{definition}
+\newenvironment{definition}[1][blargh]{
+% \begin{addmargin}{2cm}{}
+\paragraph{\textcolor{purple}{#1}}
+% \end{addmargin}
+}
+
+% \begin{cptenumerate}[label=\arabic*.] 
+%  	  	\item \xmark ref., \xmark mod.
+%  	  	\item \xmark ref., \cmark mod.
+%  	  	\item \cmark ref., \xmark mod.
+%  	  	\item \cmark ref., \cmark mod.
+%  	  \end{cptenumerate}
+
+
+% enumerate list with less spacing
+% usage:
+% \begin{cptenumerate}
+% 	\advantageit Is a very good one
+% 	\disadvantageit Is a very, very complex one.
+% \end{cptenumerate}
+\newenvironment{cptenumerate}[1][label=\arabic*.]{\begin{enumerate}[#1] \setlength\itemsep{0em}}{\end{enumerate}}
+
+\newenvironment{cptitemize}[1][,]{\begin{itemize} \setlength\itemsep{0em}}{\end{itemize}}
+
+
+% spacing around section headings
+% https://tex.stackexchange.com/questions/108684/spacing-before-and-after-section-titles
+\usepackage{titlesec}
+\titlespacing*{\section}{0em}{3em}{1em}
+
+\usepackage{geometry}
+ \geometry{
+ a4paper,
+ total={180mm,257mm}, %first dimension: text width
+ left=10mm,
+ top=20mm,
+ }
+
+
+
+\setlength\topmargin{-2.25in}
+\setlength\oddsidemargin{-0.25in}
+\setlength\evensidemargin{-0.25in}
+\setlength\textheight{9in}
+\setlength\textwidth{7in}
+% separation distance between text columns
+\setlength\columnsep{0.375in}  \newlength\titlebox \setlength\titlebox{2.25in}
+
+\setlength\headheight{0pt}   \setlength\headsep{0pt}
+
+\parindent 10pt
+\topsep 4pt plus 1pt minus 2pt
+\partopsep 1pt plus 0.5pt minus 0.5pt
+\itemsep 2pt plus 1pt minus 0.5pt
+\parsep 2pt plus 1pt minus 0.5pt
+
+\leftmargin 10pt \leftmargini\leftmargin \leftmarginii 10pt
+\leftmarginiii 5pt \leftmarginiv 5pt \leftmarginv 5pt \leftmarginvi 5pt
+\labelwidth\leftmargini\advance\labelwidth-\labelsep \labelsep 5pt
+
+\def\@listi{\leftmargin\leftmargini}
+\def\@listii{\leftmargin\leftmarginii
+   \labelwidth\leftmarginii\advance\labelwidth-\labelsep
+   \topsep 2pt plus 1pt minus 0.5pt
+   \parsep 1pt plus 0.5pt minus 0.5pt
+   \itemsep \parsep}
+\def\@listiii{\leftmargin\leftmarginiii
+    \labelwidth\leftmarginiii\advance\labelwidth-\labelsep
+    \topsep 1pt plus 0.5pt minus 0.5pt
+    \parsep \z@ \partopsep 0.5pt plus 0pt minus 0.5pt
+    \itemsep \topsep}
+\def\@listiv{\leftmargin\leftmarginiv
+     \labelwidth\leftmarginiv\advance\labelwidth-\labelsep}
+\def\@listv{\leftmargin\leftmarginv
+     \labelwidth\leftmarginv\advance\labelwidth-\labelsep}
+\def\@listvi{\leftmargin\leftmarginvi
+     \labelwidth\leftmarginvi\advance\labelwidth-\labelsep}
+
+\abovedisplayskip 7pt plus2pt minus5pt%
+\belowdisplayskip \abovedisplayskip
+\abovedisplayshortskip  0pt plus3pt%
+\belowdisplayshortskip  4pt plus3pt minus3pt%
+
+\twocolumn
+\sloppy
+
+\usepackage{geometry} % Required to change the page size to A4
+\geometry{a4paper} % Set the page size to be A4 as opposed to the default US Letter
+
+
+% \newcommand{\definition}[2] {
+% 	\paragraph{
+% 		\textcolor{purple}{#1}
+% 	} #2  
+% }
+
+% \setlist[enumerate, 1]{1\textsuperscript{o}}
+
+% \section{Formatting Demo}
+
+\endinput
+
