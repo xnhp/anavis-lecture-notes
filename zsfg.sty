@@ -6,10 +6,14 @@
 % or "RequirePackage"
 \usepackage{tabularx}
 
+
+\usepackage{units}
+
 % transparent text
 \usepackage{transparent}
 
 \usepackage{tcolorbox}
+\usepackage{algorithm2e}
 \newtcbox{\colortag}[1][red]{on line,
 arc=3pt,colback=#1!10!white,colframe=#1!50!black,
 before upper={\rule[-3pt]{0pt}{10pt}},boxrule=1pt,
@@ -24,6 +28,7 @@ boxrule=0pt,bottomrule=1pt,toprule=1pt}
 \newcommand{\greentag}[1]{\colortag[green]{\tagcontentformat #1}}
 \newcommand{\orangetag}[1]{\colortag[orange]{\tagcontentformat #1}}
 \newcommand{\redtag}[1]{\colortag[red]{\tagcontentformat #1}}
+\newcommand{\graytag}[1]{\colortag[gray]{\tagcontentformat #1}}
 
 \newcommand{\lastcompiled}{\textit{Stand: \today~\currenttime } \\}
 
@@ -56,6 +61,11 @@ boxrule=0pt,bottomrule=1pt,toprule=1pt}
 \usepackage{amssymb}
 
 \usepackage{palatino}
+
+
+\usepackage{mathtools}
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+\DeclarePairedDelimiter{\floor}{\lfloor}{\rfloor}
 
 % does not work with the build system i have in ST
 % but works when compiling in WSL with pdflatex
@@ -238,7 +248,7 @@ boxrule=0pt,bottomrule=1pt,toprule=1pt}
     \coordinate (s) at (0,0);
     \foreach \num in {#1}{
       \node (n) [minimum size=6mm, draw, rectangle] at (s) {\num};
-      \coordinate (s) at ($(s) + (8mm,0)$);
+      \coordinate (s) at ($(s) + (6mm,0)$);
     }
   \end{tikzpicture}
 }
