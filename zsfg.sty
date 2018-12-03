@@ -10,6 +10,7 @@
 \usepackage{transparent}
 
 \usepackage{tcolorbox}
+\usepackage{algorithm2e}
 \newtcbox{\colortag}[1][red]{on line,
 arc=3pt,colback=#1!10!white,colframe=#1!50!black,
 before upper={\rule[-3pt]{0pt}{10pt}},boxrule=1pt,
@@ -24,6 +25,7 @@ boxrule=0pt,bottomrule=1pt,toprule=1pt}
 \newcommand{\greentag}[1]{\colortag[green]{\tagcontentformat #1}}
 \newcommand{\orangetag}[1]{\colortag[orange]{\tagcontentformat #1}}
 \newcommand{\redtag}[1]{\colortag[red]{\tagcontentformat #1}}
+\newcommand{\graytag}[1]{\colortag[gray]{\tagcontentformat #1}}
 
 \newcommand{\lastcompiled}{\textit{Stand: \today~\currenttime } \\}
 
